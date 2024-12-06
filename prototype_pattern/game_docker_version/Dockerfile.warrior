@@ -1,0 +1,7 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+COPY src/base_character.py .
+COPY src/warrior.py .
+
+CMD ["python", "warrior.py"]

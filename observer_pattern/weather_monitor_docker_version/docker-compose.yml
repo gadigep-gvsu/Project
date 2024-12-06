@@ -1,0 +1,28 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  subject:
+    build: ./subject
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./shared:/app/shared
+
+  current-display:
+    build: ./current_conditions_display
+    depends_on:
+      - subject
+    volumes:
+      - ./shared:/app/shared
+    environment:
+      - SUBJECT_URL=http://subject:5000
+
+  stats-display:
+    build: ./statistics_display
+    depends_on:
+      - subject
+    volumes:
+      - ./shared:/app/shared
+    environment:
+      - SUBJECT_URL=http://subject:5000

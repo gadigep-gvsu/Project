@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+service Shapes {
+    rpc CreateCircle(CircleRequest) returns (ShapeResponse) {}
+    rpc CreateRectangle(RectangleRequest) returns (ShapeResponse) {}
+}
+
+service DrawingAPI {
+    rpc DrawCircle(DrawRequest) returns (DrawResponse) {}
+    rpc DrawRectangle(DrawRequest) returns (DrawResponse) {}
+}
+
+message CircleRequest {
+    float x = 1;
+    float y = 2;
+    float radius = 3;
+}
+
+message RectangleRequest {
+    float x = 1;
+    float y = 2;
+    float width = 3;
+    float height = 4;
+}
+
+message ShapeResponse {
+    string shape_id = 1;
+    string shape_data = 2;
+}
+
+message DrawRequest {
+    string shape_data = 1;
+    string api_type = 2;
+}
+
+message DrawResponse {
+    string render_result = 1;
+}

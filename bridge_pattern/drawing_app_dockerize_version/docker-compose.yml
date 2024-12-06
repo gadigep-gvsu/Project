@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  shapes:
+    build: 
+      context: ./shapes
+    volumes:
+      - ./shapes:/app
+    networks:
+      - drawing_network
+
+  drawing_apis:
+    build: 
+      context: ./drawing_apis
+    volumes:
+      - ./drawing_apis:/app
+    networks:
+      - drawing_network
+
+  client:
+    build: 
+      context: ./client
+    depends_on:
+      - shapes
+      - drawing_apis
+    networks:
+      - drawing_network
+
+networks:
+  drawing_network:
+    driver: bridge

@@ -1,0 +1,28 @@
+version: '3'
+services:
+  base:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+
+  warrior:
+    build:
+      context: .
+      dockerfile: Dockerfile.warrior
+    depends_on:
+      - base
+
+  archer:
+    build:
+      context: .
+      dockerfile: Dockerfile.archer
+    depends_on:
+      - base
+
+  character-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile.manager
+    depends_on:
+      - warrior
+      - archer
